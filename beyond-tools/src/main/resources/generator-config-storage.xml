@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <context id="default" targetRuntime="com.beyond.cloud.tools.mybatis.generator.plugin.ExtendedIntrospectedTable"
+             defaultModelType="flat">
+        <property name="javaFileEncoding" value="utf-8"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.MapperAnnotationPlugin" />
+        <jdbcConnection
+            driverClass="com.mysql.jdbc.Driver"
+            connectionURL="jdbc:mysql://localhost:3306/beyond-cloud-svc-storage?serverTimezone=Asia/Shanghai"
+            userId="root"
+            password="lucifer">
+            <!-- 自定义注释生成器中无法获得表注释，需要做特殊处理 -->
+            <property name="useInformationSchema" value="true"/>
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="true"/>
+        </javaTypeResolver>
+        <!-- [ targetProject="./target" ] -->
+        <javaModelGenerator targetPackage="com.beyond.cloud.storage.domain.entity"
+                            targetProject="../beyond-cloud-common/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!-- [ targetProject="./target" ] -->
+        <sqlMapGenerator targetPackage="com.beyond.cloud.svc.storage.mapper.base"
+                         targetProject="../beyond-cloud-svc-storage/src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!-- [ targetProject="./target" ] -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.beyond.cloud.svc.storage.mapper.base"
+                             targetProject="../beyond-cloud-svc-storage/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <table
+            tableName="storage_tbl"
+            domainObjectName="Storage"
+            mapperName="StorageBaseMapper"
+            enableSelectByExample="false"
+            enableCountByExample="false"
+            enableUpdateByExample="false"
+            enableDeleteByExample="false">
+        </table>
+    </context>
+</generatorConfiguration>

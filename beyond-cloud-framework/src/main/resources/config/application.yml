@@ -1,0 +1,75 @@
+spring:
+  cloud:
+    consul:
+      host: 10.0.0.121
+      discovery:
+        enabled: true
+        register: true
+        prefer-ip-address: true
+        ip-address: 192.168.110.179
+        service-name: ${spring.application.name}
+        tags: ${spring.application.name}
+        health-check-path: /actuator/health
+        health-check-interval: 15s
+        instance-id: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+
+    alibaba:
+      seata:
+        tx-service-group: beyond_tx_group
+
+seata:
+  enabled: true
+  registry:
+    type: consul
+    consul:
+      cluster: seata-server
+      server-addr: 10.0.0.121:8500
+  config:
+    type: file
+    file:
+      name: file.conf
+  transport:
+    type: TCP
+    server: NIO
+    heartbeat: true
+    enable-client-batch-send-request: true
+    thread-factory:
+      boss-thread-prefix: NettyBoss
+      worker-thread-prefix: NettyServerNIOWorker
+      server-executor-thread-prefix: NettyServerBizHandler
+      share-boss-worker: true
+      client-selector-thread-prefix: NettyClientSelector
+      client-selector-thread-size: 1
+      client-worker-thread-prefix: NettyClientWorkerThread
+      boss-thread-size: 1
+      worker-thread-size: default
+    shutdown:
+      wait: 3
+    compressor: none
+    serialization: seata
+  service:
+    vgroup-mapping:
+      beyond_tx_group: seata-server
+    grouplist:
+      seata-server: 127.0.0.8091
+    enable-degrade: false
+    disable-global-transaction: false
+  client:
+    rm:
+      async-commit-buffer-limit: 10000
+      lock:
+        retry-interval: 10
+        retry-times: 30
+        retry-policy-branch-rollback-on-conflict: true
+      report-retry-count: 5
+      table-meta-check-enable: false
+      report-success-enable: false
+    tm:
+      commit-retry-count: 5
+      rollback-retry-count: 5
+    undo:
+      data-validation: true
+      log-serialization: jackson
+      log-table: undo_log
+    log:
+      exception-rate: 100
