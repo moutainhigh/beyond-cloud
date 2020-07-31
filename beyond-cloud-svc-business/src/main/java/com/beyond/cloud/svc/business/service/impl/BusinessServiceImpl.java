@@ -2,8 +2,8 @@ package com.beyond.cloud.svc.business.service.impl;
 
 import com.beyond.cloud.common.ApiResult;
 import com.beyond.cloud.order.domain.entity.Order;
-import com.beyond.cloud.svc.business.client.OrderClient;
-import com.beyond.cloud.svc.business.client.StorageClient;
+import com.beyond.cloud.svc.business.client.order.OrderClient;
+import com.beyond.cloud.svc.business.client.storage.StorageClient;
 import com.beyond.cloud.svc.business.service.BusinessService;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.springframework.stereotype.Service;
