@@ -102,7 +102,25 @@ seata:
 
 ```
 
-### 3) 数据源代理
+### 3) Seata AT 模式需要 undo_log 表
+* 每个参与分布式事物的数据库添加 undo_log 表 
+```sql
+CREATE TABLE `undo_log` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `branch_id` bigint(20) NOT NULL,
+  `xid` varchar(100) NOT NULL,
+  `context` varchar(128) NOT NULL,
+  `rollback_info` longblob NOT NULL,
+  `log_status` int(11) NOT NULL,
+  `log_created` datetime NOT NULL,
+  `log_modified` datetime NOT NULL,
+  `ext` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `ux_undo_log` (`xid`,`branch_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+```
+
+### 4) 数据源代理
 * 这个是要特别注意的地方, seata对数据源做了代理和接管, 在每个参与分布式事务的服务中, 都要做如下配置.
 
 ```java
@@ -154,7 +172,7 @@ spring:
       max-active: 20
 ```
 
-### 4) 开启分布式事物
+### 5) 开启分布式事物
 * 在有通过 Feign 远程微服务调用且涉及事物的业务层方法加 @GlobalTransactional
 ```java
 @Override
