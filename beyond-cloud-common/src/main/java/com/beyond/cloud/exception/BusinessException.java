@@ -4,14 +4,13 @@ package com.beyond.cloud.exception;
  * @author lucifer
  * @date 2020/7/31 15:53
  */
-public class UnauthorizedException extends RuntimeException {
+public class BusinessException extends RuntimeException {
 
     private int code;
 
-    public static final UnauthorizedException instance = new UnauthorizedException(401);
-
-    public UnauthorizedException(final int code) {
-        this.code = code;
+    public BusinessException(final String message) {
+        super(message);
+        this.code = 500;
     }
 
     public int getCode() {

@@ -4,7 +4,7 @@ package com.beyond.cloud.exception;
  * @author lucifer
  * @date 2020/7/31 15:53
  */
-public class ForbiddenException {
+public class ForbiddenException extends RuntimeException {
 
     private int code;
 

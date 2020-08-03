@@ -4,7 +4,7 @@ package com.beyond.cloud.exception;
  * @author lucifer
  * @date 2020/7/31 15:53
  */
-public class NotFoundException {
+public class NotFoundException extends RuntimeException {
 
     private int code;
 

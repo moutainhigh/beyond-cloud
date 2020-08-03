@@ -3,6 +3,7 @@ package com.beyond.cloud.svc.storage.serivce.impl;
 import java.util.Objects;
 
 import com.beyond.cloud.common.ApiResult;
+import com.beyond.cloud.exception.BusinessException;
 import com.beyond.cloud.storage.domain.entity.Storage;
 import com.beyond.cloud.svc.storage.mapper.StorageMapper;
 import com.beyond.cloud.svc.storage.serivce.StorageService;
@@ -25,7 +26,7 @@ public class StorageServiceImpl implements StorageService {
     public ApiResult<Boolean> deduct(final String commodityCode, final int count) {
         Storage storage = storageMapper.getByCommodityCode(commodityCode);
         if (Objects.isNull(storage) || count > storage.getCount()) {
-            throw new RuntimeException("库存不足");
+            throw new BusinessException("库存不足");
         }
         storage.setCount(storage.getCount() - count);
         storageMapper.updateByPrimaryKey(storage);

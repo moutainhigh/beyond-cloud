@@ -6,10 +6,14 @@ spring:
     name: beyond-cloud-svc-order
 
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/beyond-cloud-svc-order?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
-    username: root
-    password: lucifer
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/beyond-cloud-svc-order?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
+      username: root
+      password: lucifer
+      initial-size: 5
+      max-active: 20
 
 mybatis:
   configuration:
