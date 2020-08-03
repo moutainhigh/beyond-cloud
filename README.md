@@ -1,5 +1,5 @@
 ## **`项目简介`**
-`spring cloud` 是一个学习 `spring cloud` 的演示项目, 并集成一些分布式中间件
+`spring cloud` 是一个学习微服务的演示项目, 并集成一些分布式中间件
 
 ## 各 Module 介绍
 
