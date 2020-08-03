@@ -1,12 +1,12 @@
 spring:
   cloud:
     consul:
-      host: 10.0.0.121
+      host: ${CONSUL_HOST:10.0.0.121}
       discovery:
         enabled: true
         register: true
         prefer-ip-address: true
-        ip-address: 192.168.110.179
+        ip-address: ${IP_ADDRESS:192.168.110.179}
         service-name: ${spring.application.name}
         tags: ${spring.application.name}
         health-check-path: /actuator/health
@@ -19,11 +19,12 @@ spring:
 
 seata:
   enabled: true
+  enable-auto-data-source-proxy: true              # 开启数据库自动代理
   registry:
     type: consul
     consul:
-      cluster: seata-server
-      server-addr: 10.0.0.121:8500
+      cluster: seata-server                        # seata 注册到 consul 的集群服务名
+      server-addr: ${CONSUL_HOST:10.0.0.121}:8500
   config:
     type: file
     file:
@@ -32,7 +33,7 @@ seata:
     type: TCP
     server: NIO
     heartbeat: true
-    enable-client-batch-send-request: true
+    enable-client-batch-send-request: true          # 客户端事务消息请求是否批量合并发送（默认true）
     thread-factory:
       boss-thread-prefix: NettyBoss
       worker-thread-prefix: NettyServerNIOWorker
@@ -49,27 +50,27 @@ seata:
     serialization: seata
   service:
     vgroup-mapping:
-      beyond_tx_group: seata-server
+      beyond_tx_group: seata-server                 # TC 集群（必须与 seata-server 保持一致）
     grouplist:
-      seata-server: 127.0.0.8091
-    enable-degrade: false
-    disable-global-transaction: false
+      seata-server: 127.0.0.1:8091
+    enable-degrade: false                           # 降级开关
+    disable-global-transaction: false               # 禁用全局事务（默认false）
   client:
     rm:
-      async-commit-buffer-limit: 10000
-      lock:
-        retry-interval: 10
-        retry-times: 30
-        retry-policy-branch-rollback-on-conflict: true
-      report-retry-count: 5
-      table-meta-check-enable: false
+      async-commit-buffer-limit: 10000              # 异步提交缓存队列长度（默认10000）
+      report-retry-count: 5                         # 一阶段结果上报TC重试次数（默认5）
+      table-meta-check-enable: false                # 自动刷新缓存中的表结构（默认false）
       report-success-enable: false
+      lock:
+        retry-interval: 10                          # 校验或占用全局锁重试间隔（默认10ms）
+        retry-times: 30                             # 校验或占用全局锁重试次数（默认30）
+        retry-policy-branch-rollback-on-conflict: true # 分支事务与其它全局回滚事务冲突时锁策略（优先释放本地锁让回滚成功）
     tm:
-      commit-retry-count: 5
-      rollback-retry-count: 5
+      commit-retry-count: 3                         # 一阶段全局提交结果上报TC重试次数（默认1次，建议大于1）
+      rollback-retry-count: 3                       # 一阶段全局回滚结果上报TC重试次数（默认1次，建议大于1）
     undo:
-      data-validation: true
-      log-serialization: jackson
-      log-table: undo_log
+      data-validation: true                         # 二阶段回滚镜像校验（默认true开启）
+      log-serialization: jackson                    # undo序列化方式（默认jackson）
+      log-table: undo_log                           # 自定义undo表名（默认undo_log）
     log:
-      exception-rate: 100
+      exception-rate: 100                           # 日志异常输出概率（默认100）

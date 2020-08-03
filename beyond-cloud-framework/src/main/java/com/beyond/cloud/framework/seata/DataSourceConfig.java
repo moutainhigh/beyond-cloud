@@ -16,6 +16,8 @@ import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 /**
+ * 数据源代理
+ *
  * @author lucifer
  * @date 2020/7/29 16:57
  */
@@ -45,5 +47,4 @@ public class DataSourceConfig {
         }
         return factory;
     }
-
 }
