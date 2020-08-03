@@ -26,4 +26,4 @@
 | seata.service.vgroup-mapping--key           | beyond_tx_group    | 与事物组名称一致       | 
 | seata.service.vgroup-mapping--value         | seata-server       | 与注册中心类型一致     |
 
-* [详情接入配置](./readme/README-SEATA.md)
+* [详细集成配置](./readme/README-SEATA.md)
