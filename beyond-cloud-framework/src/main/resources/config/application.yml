@@ -17,6 +17,9 @@ spring:
       seata:
         tx-service-group: beyond_tx_group
 
+  redis:
+    host: 192.168.88.128
+
 seata:
   enabled: true
   enable-auto-data-source-proxy: true              # 开启数据库自动代理
