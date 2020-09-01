@@ -1,6 +1,6 @@
 CREATE DATABASE `beyond-cloud-svc-storage` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';
 
-CREATE TABLE `storage_tbl` (
+CREATE TABLE `bc_storage` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `commodity_code` varchar(255) DEFAULT NULL,
   `count` int(11) DEFAULT '0',

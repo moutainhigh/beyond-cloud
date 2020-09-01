@@ -1,6 +1,6 @@
 CREATE DATABASE `beyond-cloud-svc-order` CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_general_ci';
 
-CREATE TABLE `order_tbl` (
+CREATE TABLE `bc_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_id` varchar(255) DEFAULT NULL,
   `commodity_code` varchar(255) DEFAULT NULL,
@@ -8,6 +8,7 @@ CREATE TABLE `order_tbl` (
   `money` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
 
 CREATE TABLE `undo_log` (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,

@@ -2,7 +2,7 @@ package com.beyond.cloud.svc.order.serivce.impl;
 
 import com.beyond.cloud.common.ApiResult;
 import com.beyond.cloud.order.domain.entity.Order;
-import com.beyond.cloud.svc.order.mapper.base.OrderBaseMapper;
+import com.beyond.cloud.svc.order.mapper.OrderMapper;
 import com.beyond.cloud.svc.order.serivce.OrderService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
-    private final OrderBaseMapper orderBaseMapper;
+    private final OrderMapper orderMapper;
 
-    public OrderServiceImpl(final OrderBaseMapper orderBaseMapper) {this.orderBaseMapper = orderBaseMapper;}
+    public OrderServiceImpl(final OrderMapper orderMapper) {this.orderMapper = orderMapper;}
 
     @Override
     @Transactional
@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
         order.setCommodityCode(commodityCode);
         order.setCount(count);
         order.setMoney(calculate(commodityCode, count));
-        orderBaseMapper.insertSelective(order);
+        orderMapper.insertSelective(order);
         return ApiResult.ok(order);
     }
 

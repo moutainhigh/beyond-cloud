@@ -1,6 +1,7 @@
 package com.beyond.cloud.svc.business.service.impl;
 
 import com.beyond.cloud.common.ApiResult;
+import com.beyond.cloud.exception.BusinessException;
 import com.beyond.cloud.order.domain.entity.Order;
 import com.beyond.cloud.svc.business.client.order.OrderClient;
 import com.beyond.cloud.svc.business.client.storage.StorageClient;
@@ -30,10 +31,10 @@ public class BusinessServiceImpl implements BusinessService {
     @Override
     @GlobalTransactional(name = "purchase", rollbackFor = Exception.class)
     public ApiResult purchase(final int userId, final String commodityCode, final int orderCount) {
-        ApiResult<Order> orderResult = orderClient.createOrder(userId, commodityCode, orderCount);
         ApiResult<Boolean> deductResult = storageClient.deduct(commodityCode, orderCount);
-        if (orderCount == 2) {
-            throw new RuntimeException("test rollback");
+        ApiResult<Order> orderResult = orderClient.createOrder(userId, commodityCode, orderCount);
+        if (orderCount > 1) {
+            throw new BusinessException("每人限购一份");
         }
         return ApiResult.ok();
     }

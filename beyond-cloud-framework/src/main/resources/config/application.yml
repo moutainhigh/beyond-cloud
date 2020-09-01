@@ -1,7 +1,7 @@
 spring:
   cloud:
     consul:
-      host: ${CONSUL_HOST:10.0.0.121}
+      host: ${LINEX_HOST:10.0.0.121}
       discovery:
         enabled: true
         register: true
@@ -18,7 +18,7 @@ spring:
         tx-service-group: beyond_tx_group
 
   redis:
-    host: 192.168.88.128
+    host: ${LINEX_HOST:10.0.0.121}
 
 seata:
   enabled: true
@@ -27,7 +27,7 @@ seata:
     type: consul
     consul:
       cluster: seata-server                        # seata 注册到 consul 的集群服务名
-      server-addr: ${CONSUL_HOST:10.0.0.121}:8500
+      server-addr: ${LINEX_HOST:10.0.0.121}:8500
   config:
     type: file
     file:

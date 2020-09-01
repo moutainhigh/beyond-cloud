@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beyond.cloud.svc.storage.mapper.ext.StorageMapperExt">
+    <resultMap id="BaseResultMap" type="com.beyond.cloud.storage.domain.entity.Storage"
+               extends="com.beyond.cloud.svc.storage.mapper.StorageMapper.BaseResultMap">
+    </resultMap>
+    <select id="getByCommodityCode" resultMap="BaseResultMap">
+        select * from bc_storage where commodity_code = #{commodityCode}
+    </select>
+</mapper>
