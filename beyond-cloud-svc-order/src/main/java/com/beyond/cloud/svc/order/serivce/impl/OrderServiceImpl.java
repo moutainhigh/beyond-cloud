@@ -2,6 +2,7 @@ package com.beyond.cloud.svc.order.serivce.impl;
 
 import com.beyond.cloud.common.ApiResult;
 import com.beyond.cloud.order.domain.entity.Order;
+import com.beyond.cloud.svc.order.client.account.AccountClient;
 import com.beyond.cloud.svc.order.mapper.OrderMapper;
 import com.beyond.cloud.svc.order.serivce.OrderService;
 import org.springframework.stereotype.Service;
@@ -14,9 +15,13 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class OrderServiceImpl implements OrderService {
 
+    private final AccountClient accountClient;
     private final OrderMapper orderMapper;
 
-    public OrderServiceImpl(final OrderMapper orderMapper) {this.orderMapper = orderMapper;}
+    public OrderServiceImpl(final AccountClient accountClient, final OrderMapper orderMapper) {
+        this.accountClient = accountClient;
+        this.orderMapper = orderMapper;
+    }
 
     @Override
     @Transactional
@@ -27,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
         order.setCount(count);
         order.setMoney(calculate(commodityCode, count));
         orderMapper.insertSelective(order);
+
+        accountClient.debit(userId, order.getMoney());
+
         return ApiResult.ok(order);
     }
 

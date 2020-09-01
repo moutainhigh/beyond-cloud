@@ -49,7 +49,6 @@
                enableDeleteByExample="false"
                enableSelectByExample="false"
                enableUpdateByExample="false">
-            <generatedKey column="id" sqlStatement="Mysql"/>
             <domainObjectRenamingRule searchString="^Bc" replaceString=""/>
             <columnRenamingRule searchString="^is_" replaceString=""/>
         </table>

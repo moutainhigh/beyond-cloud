@@ -1,4 +1,4 @@
-package com.beyond.cloud.svc.order.advice;
+package com.beyond.cloud.svc.account.advice;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -9,10 +9,7 @@ import com.beyond.cloud.exception.BusinessException;
 import com.beyond.cloud.exception.ForbiddenException;
 import com.beyond.cloud.exception.NotFoundException;
 import com.beyond.cloud.exception.UnauthorizedException;
-import com.beyond.cloud.utils.JsonUtils;
 import com.google.common.base.Throwables;
-import com.netflix.client.ClientException;
-import feign.FeignException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -58,24 +55,6 @@ public class HandlerExceptionAdvice {
     @ExceptionHandler(BusinessException.class)
     public Object handleException(final BusinessException e) {
         return ApiResult.error(e.getCode(), e.getMessage());
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-    @ExceptionHandler(RuntimeException.class)
-    public Object handleException(final RuntimeException e) {
-        Throwable cause = e.getCause();
-        if (cause instanceof ClientException) {
-            return ApiResult.error(HttpStatus.SERVICE_UNAVAILABLE.value(), e.getCause().getMessage());
-        }
-        return ApiResult.error(e.getMessage());
-    }
-
-    @ResponseBody
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler(FeignException.class)
-    public Object handleException(final FeignException e) {
-        return JsonUtils.deserialize(e.contentUTF8(), ApiResult.class);
     }
 
     @ResponseBody

@@ -21,9 +21,9 @@
 | --------------------------------------------| -------------------|--------------------|
 | spring.cloud.alibaba.seata.tx-service-group | beyond_tx_group    | 事物组名称           |
 | seata.registry.type                         | consul             | 注册中心类型         |
-| seata.registry.consul.cluster               | seata-server       | 中间件配置模块        |
-| seata.config.type                           | file               | 账户模块             |
+| seata.registry.consul.cluster               | seata-server       | 注册的服务名          |
+| seata.config.type                           | file               | 配置中心类型          |
 | seata.service.vgroup-mapping--key           | beyond_tx_group    | 与事物组名称一致       | 
-| seata.service.vgroup-mapping--value         | seata-server       | 与注册中心类型一致     |
+| seata.service.vgroup-mapping--value         | seata-server       | 与注册的服务名一致     |
 
 * [详细集成配置](./readme/README-SEATA.md)

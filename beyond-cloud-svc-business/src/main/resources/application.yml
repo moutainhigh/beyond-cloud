@@ -21,6 +21,13 @@ spring:
       seata:
         tx-service-group: beyond_tx_group
 
+feign:
+  client:
+    config:
+      default:
+        connect-timeout: 5000
+        read-timeout: 5000
+
 seata:
   enabled: true
   registry:

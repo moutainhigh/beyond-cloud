@@ -1,4 +1,4 @@
-package com.beyond.cloud.svc.business.exception;
+package com.beyond.cloud.exception;
 
 /**
  * flash-correct

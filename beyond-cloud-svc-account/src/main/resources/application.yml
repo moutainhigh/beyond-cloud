@@ -1,15 +1,15 @@
 server:
-  port: 20002
+  port: 20001
 
 spring:
   application:
-    name: beyond-cloud-svc-order
+    name: beyond-cloud-svc-account
 
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://localhost:3306/beyond-cloud-svc-order?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
+      url: jdbc:mysql://localhost:3306/beyond-cloud-svc-account?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=Asia/Shanghai&useSSL=false
       username: root
       password: lucifer
       initial-size: 5
@@ -19,16 +19,7 @@ mybatis:
   configuration:
     map-underscore-to-camel-case: true
 
-
 logging:
   level:
     root: info
     com.beyond.cloud: debug
-
-feign:
-  client:
-    config:
-      default:
-        connect-timeout: 5000
-        read-timeout: 5000
-

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.beyond.cloud.svc.account.mapper.ext.AccountMapperExt">
+    <resultMap id="BaseResultMap" type="com.beyond.cloud.account.domain.entity.Account"
+               extends="com.beyond.cloud.svc.account.mapper.AccountMapper.BaseResultMap">
+    </resultMap>
+    <select id="selectAccountByUserId" resultMap="BaseResultMap">
+        select * from bc_account where user_id = #{userId}
+    </select>
+</mapper>

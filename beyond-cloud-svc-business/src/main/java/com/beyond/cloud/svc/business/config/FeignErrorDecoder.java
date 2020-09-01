@@ -6,7 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
 import com.beyond.cloud.common.ApiResult;
-import com.beyond.cloud.svc.business.exception.ApiException;
+import com.beyond.cloud.exception.ApiException;
 import com.beyond.cloud.utils.JsonUtils;
 import feign.Response;
 import feign.codec.ErrorDecoder;

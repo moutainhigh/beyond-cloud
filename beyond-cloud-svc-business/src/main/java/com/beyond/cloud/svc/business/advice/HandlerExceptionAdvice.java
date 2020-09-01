@@ -5,12 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.beyond.cloud.common.ApiResult;
-import com.beyond.cloud.exception.BusinessException;
-import com.beyond.cloud.exception.ForbiddenException;
-import com.beyond.cloud.exception.NotFoundException;
-import com.beyond.cloud.exception.UnauthorizedException;
-import com.beyond.cloud.svc.business.exception.ApiException;
+import com.beyond.cloud.exception.*;
 import com.google.common.base.Throwables;
+import com.netflix.client.ClientException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -50,6 +47,16 @@ public class HandlerExceptionAdvice {
         return ApiResult.error(error.getDefaultMessage());
     }
 
+    @ResponseBody
+    @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
+    @ExceptionHandler(RuntimeException.class)
+    public Object handleException(final RuntimeException e) {
+        Throwable cause = e.getCause();
+        if (cause instanceof ClientException) {
+            return ApiResult.error(HttpStatus.SERVICE_UNAVAILABLE.value(), e.getMessage());
+        }
+        return ApiResult.error(e.getMessage());
+    }
 
     @ResponseBody
     @ResponseStatus(HttpStatus.OK)
