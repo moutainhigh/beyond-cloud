@@ -122,7 +122,12 @@ CREATE TABLE `undo_log` (
 
 ### 4) 数据源代理
 * 这个是要特别注意的地方, seata对数据源做了代理和接管, 在每个参与分布式事务的服务中, 都要做如下配置.
+> 启动类关闭数据源自动配置
+```java
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+```
 
+> 添加数据源配置
 ```java
 /**
  * 数据源代理
