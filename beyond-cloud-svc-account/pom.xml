@@ -20,7 +20,7 @@
         <dependency>
             <groupId>com.beyond.cloud</groupId>
             <artifactId>beyond-cloud-common</artifactId>
-            <version>${beyond.cloud.framework.version}</version>
+            <version>${beyond.cloud.common.version}</version>
         </dependency>
 
         <dependency>

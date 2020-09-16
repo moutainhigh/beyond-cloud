@@ -84,3 +84,8 @@ seata:
       log-table: undo_log
     log:
       exception-rate: 100
+
+logging:
+  level:
+    root: info
+    com.beyond.cloud: debug
