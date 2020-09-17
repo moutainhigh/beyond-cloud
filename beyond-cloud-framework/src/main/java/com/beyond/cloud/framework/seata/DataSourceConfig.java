@@ -38,7 +38,7 @@ public class DataSourceConfig {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
-        bean.setMapperLocations(resolver.getResources("classpath*:/com/beyond/svc/**/mapper/**/*.xml"));
+        bean.setMapperLocations(resolver.getResources("classpath*:/com/beyond/cloud/svc/**/mapper/**/*.xml"));
         SqlSessionFactory factory;
         try {
             factory = bean.getObject();
