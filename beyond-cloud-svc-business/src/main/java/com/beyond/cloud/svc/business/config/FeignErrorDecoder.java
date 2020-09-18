@@ -27,7 +27,6 @@ public class FeignErrorDecoder implements ErrorDecoder {
         LOGGER.debug("Status: {}", response.status());
         LOGGER.debug("Reason: {}", response.reason());
         LOGGER.debug("Headers: {}", response.headers());
-        LOGGER.debug("Body: {}", response.body());
 
         if (response.body() == null) {
             return new ApiException("服务端响应：" + response.status());
